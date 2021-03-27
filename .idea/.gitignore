@@ -3,3 +3,8 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+# file in project
+/node_modules/
+/npm-debug.log
+/favicon.ico
+/config.js

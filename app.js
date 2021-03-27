@@ -1,25 +1,46 @@
 const express = require('express');
 const app = express();
+const bodyparser = require('body-parser')
 
 const PORT = 3000;
 
 app.use('/public', express.static('public')) // Indique les middleware que l'on souhaite
+app.use(bodyparser.urlencoded({extended: false}));
 
 // function () est égale  à: () =>
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.get('/movies', (req, res) =>{
-    res.send("Bientôt les films ici même!!");
+    const title = "Films français des trente dernières années"
+    const frenchMovies = [
+        {title: "Le fabuleux destin d'Amélie Poulain", year: 2001 },
+        {title: "Buffet froid", year: 1979 },
+        {title: "Le diner de cons", year: 1998 },
+        {title: "De rouille et d'os", year: 2012 },
+    ];
+    res.render('movies', {movies: frenchMovies, title: title});
 });
+
+app.post('./movies', (req, res) => {
+    console.log(req.body);
+    res.sendStatus(201);
+})
 
 app.get('/movies/add', ((req, res) => {
   res.send("Prochainement, un formulaire d'ajout") ;
-}))
+}));
 
-app.get('/movies/:id', (req, res) =>{
+// app.get('/movie-details', ((req, res) => {
+//   // res.send("Prochainement, un formulaire d'ajout") ;
+//     res.render('movie-details')
+// }));
+
+app.get('/movies/:id/:title', (req, res) =>{
     const id = req.params.id;
-    res.send(`Film numéro ${id}`)
+    const movie_title = req.params.title;
+    // res.send(`Film numéro ${id}`)
+    res.render('movie-details', { movie_id: id, movie_title: movie_title})
 })
 
 app.get('/', (req, res) =>{

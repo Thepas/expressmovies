@@ -10,3 +10,51 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+.wrapper{
+    width:940px;
+    margin:0 auto;
+    padding: 0 10px;
+}
+
+/*HEADER*/
+header{
+    height:120px;
+}
+
+header h1{
+    float:left;
+    margin-top: 32px;
+}
+
+header nav{
+    float:right;
+    margin-top: 50px;
+}
+
+header nav ul li{
+    float: left;
+    display: inline-block;
+}
+
+header nav ul li a{
+    text-transform: uppercase;
+    font-weight:bold;
+    margin-right: 20px;
+}
+/*FOOTER*/
+footer{
+    height: 200px;
+    background-color: #444444;
+}
+footer h1{
+    color: white;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.copyright{
+    text-align: center;
+    font-weight: bold;
+    padding-top: 30px;
+    color: #777777;
+}

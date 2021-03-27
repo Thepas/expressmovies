@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Express Movies</title>
+        <link rel="stylesheet" href="../public/style.css" />
+    </head>
+
+    <body>
+        <%- include ('partials/header') %>
+
+        <section id="movies">
+            <div class="central">
+                <h2><%=title %></h2>
+                <div>
+                    <% for(movie of movies) {%>
+                        <div> <%=movie.title%> (<%= movie.year %>)</div>
+                    <% }%>
+                </div>
+            </div>
+
+            <div class="form">
+                <form action="/movies" method="post">
+                    <label for="movietitle"> Titre du film</label>
+                    <input type="text" name="movietitle" id="movietitle">
+                    <label for="movieyear"> Année du film</label>
+                    <input type="number" name="movieyear" id="movieyear">
+                    <button type="submit">ajouter</button>
+                </form>
+            </div>
+                
+        </section>
+
+        <%- include ('partials/footer') %>
+    </body>
+</html>
