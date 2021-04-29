@@ -7,6 +7,8 @@ const PORT = 3000;
 let frenchMovies = [];
 const upload = multer();
 
+const jwt = require('jsonwebtoken')
+
 app.use('/public', express.static('public')) // Indique les middleware que l'on souhaite
 // app.use(bodyparser.urlencoded({extended: false}));
 
@@ -26,7 +28,7 @@ app.get('/movies', (req, res) =>{
     res.render('movies', {movies: frenchMovies, title: title});
 });
 
-// var urlencodedParser = bodyparser.urlencoded({extended: false});
+ var urlencodedParser = bodyparser.urlencoded({extended: false});
 
 // app.post('/movies', urlencodedParser, (req, res) => {
 //     const movietitle = req.body.movietitle;
@@ -73,6 +75,34 @@ app.get('/movies/:id/:title', (req, res) =>{
     const movie_title = req.params.title;
     // res.send(`Film numéro ${id}`)
     res.render('movie-details', { movie_id: id, movie_title: movie_title})
+});
+
+app.get('/login', (req, res) => {
+    res.render('login', {title: 'Connexion'})
+});
+
+const fakeUser = {email: 'testuser@testmail.fr', password: 'qsd'};
+const secret = "qsdjS12ozehdoIJ123DJOZJLDSCqsdeffdg123ER56SDFZedhWXojqshduzaohduihqsDAqsdq";
+
+app.post('/login', urlencodedParser, (req, res) => {
+    console.log('login post', req.body)
+    if(!req.body){
+        res.sendStatus(500);
+    } else{
+        if(fakeUser.email ===req.body.email && fakeUser.password === req.body.password){
+            const myToken = jwt.sign({iss: 'http://expressmovies.fr', user: 'Sam', role:'moderator'}, secret);
+            res.json(myToken);
+            // res.json({
+            //     email:"testuser@testmail.fr",
+            //     favoriteMovie: "Il était une fois dans l'ouest",
+            //     favoriteMovieTheater: "Ciné TNB, 1 rue Saint-Hélier, 35040 Rennes",
+            //     lastloginDate: new Date()
+            // });
+        }
+        else{
+            res.sendStatus(401);
+        }
+    }
 })
 
 app.get('/', (req, res) =>{
