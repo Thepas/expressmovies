@@ -26,7 +26,7 @@ app.get('/movies', (req, res) =>{
     res.render('movies', {movies: frenchMovies, title: title});
 });
 
-var urlencodedParser = bodyparser.urlencoded({extended: false});
+// var urlencodedParser = bodyparser.urlencoded({extended: false});
 
 // app.post('/movies', urlencodedParser, (req, res) => {
 //     const movietitle = req.body.movietitle;
@@ -62,6 +62,11 @@ app.get('/movies/add', ((req, res) => {
 //   // res.send("Prochainement, un formulaire d'ajout") ;
 //     res.render('movie-details')
 // }));
+
+app.get('/movie-search', ((req, res) => {
+  // res.send("Prochainement, un formulaire d'ajout") ;
+    res.render('movie-search');
+}));
 
 app.get('/movies/:id/:title', (req, res) =>{
     const id = req.params.id;
